@@ -10,7 +10,7 @@ def get_data(url):
         print('Could not fetch data from API')
 
 # Filtering method
-def print_data(data):
+def filter_data(data):
     for item in data:
         if item['userId']>9:
             print(item)
@@ -33,6 +33,13 @@ def update_data(url,payload):
         print(f'Post updation is unsuccessful with status code:{response.status_code}')
         print(f'Response Conetnt:{response.content}')
 
+def delete_data(url):
+    response = requests.delete(url)
+    if response.status_code==200:
+        print(f'Post is deleted successfluy with status code:{response.status_code}')
+    else:
+        print('Could not delete post')
+
 if __name__=='__main__':
     base_url='https://jsonplaceholder.typicode.com/posts'
 
@@ -49,10 +56,11 @@ if __name__=='__main__':
         print(data)
 
     elif answer== '2':
-        userId = input('Enter userId:')
         id = input('Enter id:')
+        title = input('Enter title:')
         body = input('Enter body:')
-        payload={'userId':{userId},'id':{id},'body':{body}}
+        userId = input('Enter userId:')
+        payload={'id':{id},'title':{title} ,'body':{body}, 'userId':{userId}}
         post_data(base_url,payload)
 
     elif answer== '3':
@@ -63,3 +71,8 @@ if __name__=='__main__':
         payload={'id':{id},'title':{title} ,'body':{body}, 'userId':{userId}}
         update_url=f'{base_url}/{id}'
         update_data(update_url,payload)
+
+    elif answer== '4':
+        id = input('Enter id:')
+        delete_url=f'{base_url}/{id}'
+        delete_data(delete_url)
