@@ -25,14 +25,14 @@ def post_data(url,payload):
 if __name__=='__main__':
     url='https://jsonplaceholder.typicode.com/posts'
 
-    answer= input('Do you want to get data?')
+    answer= input('Do you want to read posts data?')
     if answer== 'yes':
         id = input('Enter id:')
         get_url=f'{url}/{id}'
         data = get_data(get_url)
         print(data)
 
-    answer= input('Do you want to post data?')
+    answer= input('Do you want to create post data?')
     if answer== 'yes':
         userId = input('Enter userId:')
         id = input('Enter id:')
