@@ -1,13 +1,16 @@
 import requests
 import json
 
-# GET request for fetching data from api endpoint
+# GET request method for fetching data
 def get_data(url):
-    response = requests.get(url)
-    if response.status_code==200:
-        return response.json()
-    else:
-        print('Could not fetch data from API')
+    try:
+        response = requests.get(url)
+        if response.status_code==200:
+            return response.json()
+        else:
+            print('Could not fetch data from API')
+    except requests.exceptions.RequestException as e:
+        print(f'An error occured:{e}')
 
 # Filtering method
 def filter_data(data):
@@ -15,40 +18,52 @@ def filter_data(data):
         if item['userId']>9:
             print(item)
 
-# POST request for posting data to api endpoint
+# POST request method for posting data
 def post_data(url,payload):
-    response = requests.post(url,data=payload)
-    if response.status_code==201:
-        print(f'Post is created successfuly with status code:{response.status_code}')
-    else:
-        print(f'Post creation is unsuccessful with status code:{response.status_code}')
-        print(f'Response Conetnt:{response.content}')
+    try:
+        response = requests.post(url,data=payload)
+        if response.status_code==201:
+            print(f'Post is created successfuly')
+        else:
+            print(f'Post creation is unsuccessful')
+            print(f'Response Conetnt:{response.content}')
+    except requests.exceptions.RequestException as e:
+        print(f'An error occured:{e}')
 
+# PUT request method for updating data
 def update_data(url,payload):
-    response = requests.put(url,data=payload)
-    if response.status_code==200:
-        print(f'Post is updated successfluy with status code:{response.status_code}')
-        print(f'Updated Post:{response.json()}')
-    else:
-        print(f'Post updation is unsuccessful with status code:{response.status_code}')
-        print(f'Response Conetnt:{response.content}')
+    try:
+        response = requests.put(url,data=payload)
+        if response.status_code==200:
+            print(f'Post is updated successfluy')
+            print(f'Updated Post:{response.json()}')
+        else:
+            print(f'Post updation is unsuccessful')
+            print(f'Response Conetnt:{response.content}')
+    except requests.exceptions.RequestException as e:
+        print(f'An error occured:{e}')
 
+# DELETE request method for deleting data
 def delete_data(url):
-    response = requests.delete(url)
-    if response.status_code==200:
-        print(f'Post is deleted successfluy with status code:{response.status_code}')
-    else:
-        print('Could not delete post')
+    try:
+        response = requests.delete(url)
+        if response.status_code==200:
+            print(f'Post is deleted successfluy')
+        else:
+            print('Post deletion is unsuccessful')
+            print(f'Response Conetnt:{response.content}')
+    except requests.exceptions.RequestException as e:
+        print(f'An error occured:{e}')
 
 if __name__=='__main__':
     base_url='https://jsonplaceholder.typicode.com/posts'
 
-    print('Select any one option')
-    print('1: Read Post' '\n' 
+    print('Select any one option:' '\n'
+          '1: Read Post' '\n' 
           '2. Create Post' '\n'
           '3. Update Post' '\n'
           '2. Delete Post' '\n')
-    answer= input('Select number:')
+    answer= input('Enter number:')
     if answer== '1':
         id = input('Enter id:')
         get_url=f'{base_url}/{id}'
