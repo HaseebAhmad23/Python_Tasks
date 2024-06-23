@@ -58,6 +58,7 @@ def delete_data(url):
 if __name__=='__main__':
     base_url='https://jsonplaceholder.typicode.com/posts'
 
+    # case selction from user
     print('Select any one option:' '\n'
           '1: Read Post' '\n' 
           '2. Create Post' '\n'
