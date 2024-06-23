@@ -62,8 +62,9 @@ if __name__=='__main__':
           '1: Read Post' '\n' 
           '2. Create Post' '\n'
           '3. Update Post' '\n'
-          '2. Delete Post' '\n')
+          '4. Delete Post' '\n')
     answer= input('Enter number:')
+
     if answer== '1':
         id = input('Enter id:')
         get_url=f'{base_url}/{id}'
@@ -91,3 +92,7 @@ if __name__=='__main__':
         id = input('Enter id:')
         delete_url=f'{base_url}/{id}'
         delete_data(delete_url)
+
+    else:
+        print('Wrong input value')
+        print('.... Exiting ....')
